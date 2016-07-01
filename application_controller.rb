@@ -1,18 +1,42 @@
-# Write your name here: 
+# Write your name here: David Tsai
 
 class UsersController < Sinatra::Base
   # new
+    get '/users/new' do
+      erb :new
+    end
 
-  # create
+  # create  
+    post '/users' do
+      @user = User.create(params)
+      erb :index
+    end
 
   # show
+    get '/users/:id' do
+      @user = User.find(params[:id])
+      erb :show
+    end
 
   # index
+    get '/users' do
+      @users = User.all
+      erb :index
+    end
 
   # edit
+    get '/users/:id/edit' do
+      @user = User.find(params[:id])
+      erb :edit
+    end
 
   # update
-  
+    post '/users/:id' do
+      @user = User.find(params[:id])
+      @user = User.update(params)
+      erb :show
+    end
+    
 end
 
 # Fork this code make a pull request
