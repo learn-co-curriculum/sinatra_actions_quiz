@@ -2,16 +2,40 @@
 
 class UsersController < Sinatra::Base
   # new
+  get 'users/new' do 
+  	erb :new
+	end
+
 
   # create
+  post '/users' do 
+  	@user = User.create(params)
+  	redirect '/users'
+  end
 
   # show
+  get 'users/:id'
+  @user = User.find_by_id(params[:id])
+  	erb :show
+  end
 
   # index
+  get '/users' do 
+  	@users = Users.all
+  	erb :index 
+  end
 
   # edit
+  get '/users/:id/edit' do 
+  	@user = User.find_by_id(params[:id])
+  	erb :edit
+  end
 
-  # update
+  # update - not that comfy with this one 
+  get '/users/:id/update' do 
+  @user = User.find_by_id(params[:id])
+  erb :update 
+  end 
   
 end
 
