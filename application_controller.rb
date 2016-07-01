@@ -1,17 +1,44 @@
 # Write your name here: 
+#Clark Sacktor
 
 class UsersController < Sinatra::Base
   # new
+  #displays the form for a creation
+  get 'users/new' do 
+    erb :new
+  end 
 
-  # create
+  # create this creates a new instance based off of the params 
+  post '/users/' do 
+    @user = User.create(params)
+    redirect to 'user/#{@user.id}'
+  end 
 
-  # show
+  # show This displays an insance 
+  get 'users/:id' do 
+    @user = User.find(params[:id])
+    erb :show
+  end 
 
-  # index
+  # index This shows all the users 
+  get '/users/' do 
+    @users = User.all
+    erb :index
+  end 
 
-  # edit
 
-  # update
+  # edit This displays the form so the user can update
+  get '/users/:id/edit' do 
+    @user = User.find(params[:id])
+    erb :edit
+  end 
+
+  # update This updates the user
+    post 'users/:id' do 
+    @user = User.find(params[:id])
+    @user.update(params)
+    redirect to 'user/#{@user.id}'
+  end 
   
 end
 
