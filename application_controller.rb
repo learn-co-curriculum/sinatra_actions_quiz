@@ -1,17 +1,41 @@
 # Write your name here: 
+# Chris Wigington
 
 class UsersController < Sinatra::Base
   # new
+  get '/users/new' do
+    erb :new
+  end
 
   # create
+  post '/users' do 
+    @user = User.create(params)
+    redirect "/users/#{@user.id}"
+  end
 
   # show
+  get '/users/:id' do 
+    @user = User.find(params[:id])
+    erb :show
+  end
 
   # index
+  get '/users' do 
+    erb :index
+  end
 
   # edit
+  get '/users/:id/edit' do 
+    @user = User.find(params[:id])
+    erb :edit
+  end
 
   # update
+  patch '/users/:id' do 
+    @user = User.find(params[:id])
+    @user.update(params)
+    redirect "/users/#{params[:id]}"
+  end
   
 end
 
