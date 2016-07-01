@@ -1,17 +1,46 @@
-# Write your name here: 
+# Write your name here: Tal
+
 
 class UsersController < Sinatra::Base
-  # new
 
-  # create
-
-  # show
 
   # index
+   get '/users' do 
+    users=User.all
+    erb :'users/index'
+  end
+
+  # new
+  get '/users/new' do 
+    erb :'users/new'
+  end
+
+  # create
+  post '/users' do 
+    @user = User.create(params["user"])
+    redirect to 'users/#{@user.id}'
+  end
+
+  # show
+  get '/users/:id' do 
+    @user = User.find(params["id"])
+    erb :'users/show'
+  end
+
 
   # edit
+  get '/users/:id/edit' do 
+    @user = User.find(params["id"])
+    erb :'users/edit'
+  end
 
   # update
+  post '/users/:id' do 
+    @user = User.find(params["id"])
+    @user.udpate(params["user"])
+    redirect to 'users/#{user.id}'
+  end
+
   
 end
 
