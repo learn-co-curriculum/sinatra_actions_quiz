@@ -28,6 +28,10 @@ class UsersController < Sinatra::Base
   # edit
 
   # update
+  get '/users/:id' do
+    @user_update = users.find_by(params[:id]).save
+    erb :user_update
+  end
   
 end
 
