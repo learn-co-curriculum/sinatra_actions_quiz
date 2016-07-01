@@ -1,19 +1,44 @@
-# Write your name here: 
+# Write your name here: Avram 
 
 class UsersController < Sinatra::Base
   # new
+  get '/users/new' do 
+    erb: '/users/new.html'
+  end 
 
   # create
+  post '/users' do 
+    @user = User.create(params)
+    erb: '/users/show.html'
+  end
 
   # show
+  get '/users/:id' do 
+    @user = User.find(params[:id])
+    erb: '/users/show.html'
+  end
 
   # index
+  get '/users' do 
+    @users = User.all 
+    erb: '/users/index.html'
+  end
 
   # edit
+  get '/users/:id/edit' do 
+    @user = User.find(params[:id])
+    erb: '/users/edit.html'
+  end
 
   # update
+  patch '/users/:id' do 
+    @user = User.find(params[:id])
+    @user.update(params)
+    erb: '/users/show.html'
+  end
   
 end
+
 
 # Fork this code make a pull request
 
