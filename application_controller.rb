@@ -45,7 +45,7 @@ class UsersController < Sinatra::Base
     @thing = Thing.find(params[:id])
     @thing.update(params)
 
-    redirect '/things/#{@thing.id}'
+    redirect "/things/#{@thing.id}"
   end
   
 end
